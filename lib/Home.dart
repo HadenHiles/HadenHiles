@@ -67,26 +67,50 @@ class _HomeState extends State<Home> {
                       crossAxisAlignment: CrossAxisAlignment.center,
                       direction: Axis.vertical,
                       children: [
-                        Flexible(
-                          flex: 1,
-                          child: Stack(
-                            alignment: Alignment.bottomCenter,
-                            children: [
-                              Transform.translate(
-                                offset: Offset(0, -(MediaQuery.of(context).size.height * .55)),
-                                child: Image(
-                                  alignment: Alignment.bottomCenter,
-                                  width: MediaQuery.of(context).size.width > 1024 ? 750 : MediaQuery.of(context).size.width * 0.9,
-                                  image: AssetImage("assets/images/haden-light-transparent-large.png"),
+                        Stack(
+                          alignment: Alignment.bottomCenter,
+                          children: [
+                            Flex(
+                              direction: Axis.horizontal,
+                              children: [
+                                Flexible(
+                                  flex: 1,
+                                  child: Container(
+                                    height: MediaQuery.of(context).size.height,
+                                    color: Color(0xff5f4bb6),
+                                  ),
                                 ),
-                              ),
-                              Image(
+                                Flexible(
+                                  flex: 1,
+                                  child: Container(
+                                    height: MediaQuery.of(context).size.height,
+                                    color: Color(0xff333333),
+                                  ),
+                                ),
+                              ],
+                            ),
+                            Flexible(
+                              flex: 1,
+                              child: Stack(
                                 alignment: Alignment.bottomCenter,
-                                height: MediaQuery.of(context).size.height * 0.65,
-                                image: AssetImage("assets/images/portrait.png"),
+                                children: [
+                                  Transform.translate(
+                                    offset: Offset(0, -(MediaQuery.of(context).size.height * .55)),
+                                    child: Image(
+                                      alignment: Alignment.bottomCenter,
+                                      width: MediaQuery.of(context).size.width > 1024 ? 750 : MediaQuery.of(context).size.width * 0.9,
+                                      image: AssetImage("assets/images/haden-split-transparent.png"),
+                                    ),
+                                  ),
+                                  Image(
+                                    alignment: Alignment.bottomCenter,
+                                    height: MediaQuery.of(context).size.height * 0.65,
+                                    image: AssetImage("assets/images/portrait.png"),
+                                  ),
+                                ],
                               ),
-                            ],
-                          ),
+                            ),
+                          ],
                         ),
                       ],
                     ),
