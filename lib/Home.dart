@@ -64,13 +64,28 @@ class _HomeState extends State<Home> {
                     ),
                     Flex(
                       mainAxisAlignment: MainAxisAlignment.end,
+                      crossAxisAlignment: CrossAxisAlignment.center,
                       direction: Axis.vertical,
                       children: [
                         Flexible(
                           flex: 1,
-                          child: Image(
+                          child: Stack(
                             alignment: Alignment.bottomCenter,
-                            image: AssetImage("assets/images/portrait.png"),
+                            children: [
+                              Transform.translate(
+                                offset: Offset(0, -(MediaQuery.of(context).size.height * .55)),
+                                child: Image(
+                                  alignment: Alignment.bottomCenter,
+                                  width: MediaQuery.of(context).size.width > 1024 ? 750 : MediaQuery.of(context).size.width * 0.9,
+                                  image: AssetImage("assets/images/haden-light-transparent-large.png"),
+                                ),
+                              ),
+                              Image(
+                                alignment: Alignment.bottomCenter,
+                                height: MediaQuery.of(context).size.height * 0.65,
+                                image: AssetImage("assets/images/portrait.png"),
+                              ),
+                            ],
                           ),
                         ),
                       ],
