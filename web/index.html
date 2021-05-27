@@ -28,28 +28,16 @@
 </head>
 <body>
   <!-- The core Firebase JS SDK is always required and must be listed first -->
-  <script src="https://www.gstatic.com/firebasejs/8.6.2/firebase-app.js"></script>
+  <script defer src="/__/firebase/8.6.2/firebase-app.js"></script>
 
   <!-- TODO: Add SDKs for Firebase products that you want to use
       https://firebase.google.com/docs/web/setup#available-libraries -->
-  <script src="https://www.gstatic.com/firebasejs/8.6.2/firebase-analytics.js"></script>
+  <script defer src="/__/firebase/8.6.2/firebase-analytics.js"></script>
 
-  <script>
-    // Your web app's Firebase configuration
-    // For Firebase JS SDK v7.20.0 and later, measurementId is optional
-    var firebaseConfig = {
-      apiKey: "AIzaSyBmgcys5SmLyqEfyGDQ3_VLFUjViLnKDl8",
-      authDomain: "haden-hiles.firebaseapp.com",
-      projectId: "haden-hiles",
-      storageBucket: "haden-hiles.appspot.com",
-      messagingSenderId: "334685280420",
-      appId: "1:334685280420:web:51d06327abbe8392acee31",
-      measurementId: "G-KZZ47RQZ9C"
-    };
-    // Initialize Firebase
-    firebase.initializeApp(firebaseConfig);
-    firebase.analytics();
-  </script>
+  <!-- Load the Firebase SDKs before loading this file -->
+  <script defer src="/__/firebase/init.js"></script>
+
+  
   <!-- This script installs service_worker.js to provide PWA functionality to
        application. For more information, see:
        https://developers.google.com/web/fundamentals/primers/service-workers -->
