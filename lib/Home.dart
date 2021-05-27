@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'package:hadenhiles/widgets/MarkdownContent.dart';
 
 class Home extends StatefulWidget {
   Home({Key? key}) : super(key: key);
@@ -9,6 +11,7 @@ class Home extends StatefulWidget {
 
 class _HomeState extends State<Home> {
   final PageController _verticalPageController = PageController(initialPage: 1);
+  final PageController _horizontalPageController = PageController(initialPage: 1);
 
   @override
   Widget build(BuildContext context) {
@@ -39,11 +42,53 @@ class _HomeState extends State<Home> {
             mainAxisAlignment: MainAxisAlignment.end,
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              Flexible(
-                flex: 2,
-                child: Image(
-                  alignment: Alignment.bottomCenter,
-                  image: AssetImage("assets/images/portrait.png"),
+              Container(
+                width: MediaQuery.of(context).size.width,
+                height: MediaQuery.of(context).size.height,
+                child: PageView(
+                  controller: _horizontalPageController,
+                  scrollDirection: Axis.horizontal,
+                  children: [
+                    Flex(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      direction: Axis.vertical,
+                      children: [
+                        Flexible(
+                          flex: 1,
+                          child: Image(
+                            alignment: Alignment.bottomCenter,
+                            image: AssetImage("assets/images/portrait.png"),
+                          ),
+                        ),
+                      ],
+                    ),
+                    Flex(
+                      mainAxisAlignment: MainAxisAlignment.end,
+                      direction: Axis.vertical,
+                      children: [
+                        Flexible(
+                          flex: 1,
+                          child: Image(
+                            alignment: Alignment.bottomCenter,
+                            image: AssetImage("assets/images/portrait.png"),
+                          ),
+                        ),
+                      ],
+                    ),
+                    Flex(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      direction: Axis.vertical,
+                      children: [
+                        Flexible(
+                          flex: 1,
+                          child: Image(
+                            alignment: Alignment.bottomCenter,
+                            image: AssetImage("assets/images/portrait.png"),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ],
                 ),
               ),
             ],
@@ -57,8 +102,26 @@ class _HomeState extends State<Home> {
                 flex: 1,
                 child: Image(
                   alignment: Alignment.topCenter,
-                  width: MediaQuery.of(context).size.width < 750 ? MediaQuery.of(context).size.width * 0.75 : 750,
+                  width: MediaQuery.of(context).size.width < 500 ? MediaQuery.of(context).size.width * 0.75 : 500,
                   image: AssetImage("assets/images/haden-light-transparent-large.png"),
+                ),
+              ),
+              Flexible(
+                flex: 2,
+                child: FutureBuilder(
+                  future: rootBundle.loadString("content/about.md"),
+                  builder: (BuildContext context, AsyncSnapshot<String> snapshot) {
+                    if (snapshot.hasData) {
+                      return Padding(
+                        padding: EdgeInsets.symmetric(vertical: 15, horizontal: MediaQuery.of(context).size.width * .05),
+                        child: MarkdownContent(data: snapshot.data ?? ""),
+                      );
+                    }
+
+                    return Center(
+                      child: CircularProgressIndicator(),
+                    );
+                  },
                 ),
               ),
             ],
