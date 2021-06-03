@@ -1,3 +1,7 @@
+// ignore: import_of_legacy_library_into_null_safe
+import 'package:draggable_widget/draggable_widget.dart';
+// ignore: import_of_legacy_library_into_null_safe
+import 'package:draggable_widget/model/anchor_docker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:hadenhiles/widgets/MarkdownContent.dart';
@@ -10,90 +14,13 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
-  final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
   final PageController _verticalPageController = PageController(initialPage: 1);
   final PageController _horizontalPageController = PageController(initialPage: 1);
+  DragController _dragController = DragController();
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      key: _scaffoldKey,
-      endDrawer: Theme(
-          data: Theme.of(context).copyWith(
-            canvasColor: Colors.transparent,
-          ),
-          child: Drawer(
-            elevation: 0,
-            child: Container(
-              color: Colors.transparent,
-              child: ListView(
-                padding: EdgeInsets.zero,
-                children: <Widget>[
-                  ListTile(
-                    tileColor: Colors.transparent,
-                    title: Text(
-                      'Projects'.toUpperCase(),
-                      style: TextStyle(
-                        color: Colors.transparent,
-                      ),
-                    ),
-                    onTap: () {
-                      // This line code will close drawer programatically....
-                      Navigator.pop(context);
-                    },
-                  ),
-                  Divider(
-                    height: 2.0,
-                    color: Colors.transparent,
-                  ),
-                  ListTile(
-                    tileColor: Colors.transparent,
-                    title: Text(
-                      'About me'.toUpperCase(),
-                      style: TextStyle(
-                        color: Colors.white,
-                      ),
-                    ),
-                    onTap: () {
-                      Navigator.pop(context);
-                    },
-                  ),
-                  Divider(
-                    height: 2.0,
-                    color: Colors.transparent,
-                  ),
-                  ListTile(
-                    tileColor: Colors.transparent,
-                    title: Text(
-                      'Education'.toUpperCase(),
-                      style: TextStyle(
-                        color: Colors.white,
-                      ),
-                    ),
-                    onTap: () {
-                      Navigator.pop(context);
-                    },
-                  ),
-                  Divider(
-                    height: 2.0,
-                    color: Colors.transparent,
-                  ),
-                  ListTile(
-                    tileColor: Colors.transparent,
-                    title: Text(
-                      'Follow'.toUpperCase(),
-                      style: TextStyle(
-                        color: Colors.white,
-                      ),
-                    ),
-                    onTap: () {
-                      Navigator.pop(context);
-                    },
-                  )
-                ],
-              ),
-            ),
-          )),
       body: Stack(
         children: [
           PageView(
@@ -252,15 +179,24 @@ class _HomeState extends State<Home> {
             top: 10,
             right: 10,
             child: Container(
-              child: IconButton(
-                iconSize: 50,
-                onPressed: () {
-                  _scaffoldKey.currentState!.openEndDrawer();
-                },
-                icon: Icon(
-                  Icons.menu,
-                  color: Colors.white,
+              child: DraggableWidget(
+                bottomMargin: 80,
+                topMargin: 80,
+                intialVisibility: true,
+                horizontalSapce: 20,
+                shadowBorderRadius: 50,
+                child: Container(
+                  height: 100,
+                  width: 200,
+                  decoration: BoxDecoration(
+                    color: Colors.blue,
+                  ),
+                  child: Stack(
+                    children: [IconButton(icon: Icon(Icons.close), onPressed: () {})],
+                  ),
                 ),
+                initialPosition: AnchoringPosition.bottomLeft,
+                dragController: _dragController,
               ),
             ),
           ),
