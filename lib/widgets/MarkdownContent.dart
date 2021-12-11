@@ -14,10 +14,25 @@ class MarkdownContent extends StatelessWidget {
       styleSheet: MarkdownStyleSheet(
         h1: GoogleFonts.openSans(
           color: Colors.white,
-          fontSize: 40,
+          fontSize: 38,
           letterSpacing: .05,
-          height: 2,
+          height: 1,
           fontWeight: FontWeight.bold,
+        ),
+        h2: GoogleFonts.openSans(
+          color: Colors.white,
+          fontSize: 30,
+          letterSpacing: .05,
+          height: 1,
+          fontWeight: FontWeight.bold,
+        ),
+        h3: GoogleFonts.openSans(
+          color: Colors.white,
+          fontSize: 22,
+          letterSpacing: .05,
+          height: 1,
+          fontWeight: FontWeight.w200,
+          fontStyle: FontStyle.italic,
         ),
         p: GoogleFonts.openSans(
           color: Colors.white,

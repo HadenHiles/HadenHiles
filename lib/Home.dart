@@ -31,20 +31,23 @@ class _HomeState extends State<Home> {
                   children: [
                     Flexible(
                       flex: 1,
-                      child: FutureBuilder(
-                        future: rootBundle.loadString("content/about.md"),
-                        builder: (BuildContext context, AsyncSnapshot<String> snapshot) {
-                          if (!snapshot.hasData) {
-                            return Center(
-                              child: CircularProgressIndicator(),
-                            );
-                          }
+                      child: SingleChildScrollView(
+                        child: FutureBuilder(
+                          future: rootBundle.loadString("content/about.md"),
+                          builder: (BuildContext context, AsyncSnapshot<String> snapshot) {
+                            if (!snapshot.hasData) {
+                              return Center(
+                                child: CircularProgressIndicator(),
+                              );
+                            }
 
-                          return Padding(
-                            padding: EdgeInsets.symmetric(horizontal: MediaQuery.of(context).size.width * .10),
-                            child: MarkdownContent(data: snapshot.data ?? ""),
-                          );
-                        },
+                            return Container(
+                              padding: EdgeInsets.symmetric(vertical: 25),
+                              width: (MediaQuery.of(context).size.width > 968) ? MediaQuery.of(context).size.width * .60 : MediaQuery.of(context).size.width * .90,
+                              child: MarkdownContent(data: snapshot.data ?? ""),
+                            );
+                          },
+                        ),
                       ),
                     ),
                   ],
