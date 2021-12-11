@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_markdown/flutter_markdown.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class MarkdownContent extends StatelessWidget {
   const MarkdownContent({Key? key, required this.data}) : super(key: key);
@@ -11,13 +12,18 @@ class MarkdownContent extends StatelessWidget {
     return MarkdownBody(
       data: data,
       styleSheet: MarkdownStyleSheet(
-        h1: TextStyle(
+        h1: GoogleFonts.openSans(
           color: Colors.white,
           fontSize: 40,
+          letterSpacing: .05,
+          height: 2,
+          fontWeight: FontWeight.bold,
         ),
-        p: TextStyle(
-          color: Colors.white70,
-          fontSize: 18,
+        p: GoogleFonts.openSans(
+          color: Colors.white,
+          fontSize: 22,
+          letterSpacing: .05,
+          height: 2,
         ),
       ),
     );

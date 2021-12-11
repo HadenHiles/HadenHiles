@@ -1,7 +1,3 @@
-// ignore: import_of_legacy_library_into_null_safe
-import 'package:draggable_widget/draggable_widget.dart';
-// ignore: import_of_legacy_library_into_null_safe
-import 'package:draggable_widget/model/anchor_docker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:hadenhiles/widgets/MarkdownContent.dart';
@@ -16,7 +12,6 @@ class Home extends StatefulWidget {
 class _HomeState extends State<Home> {
   final PageController _verticalPageController = PageController(initialPage: 1);
   final PageController _horizontalPageController = PageController(initialPage: 1);
-  DragController _dragController = DragController();
 
   @override
   Widget build(BuildContext context) {
@@ -27,16 +22,33 @@ class _HomeState extends State<Home> {
             controller: _verticalPageController,
             scrollDirection: Axis.vertical,
             children: [
-              Flex(
-                direction: Axis.vertical,
-                mainAxisAlignment: MainAxisAlignment.center,
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  Flexible(
-                    flex: 1,
-                    child: Text("hi"),
-                  ),
-                ],
+              Container(
+                color: Color(0xff333333),
+                child: Flex(
+                  direction: Axis.vertical,
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    Flexible(
+                      flex: 1,
+                      child: FutureBuilder(
+                        future: rootBundle.loadString("content/about.md"),
+                        builder: (BuildContext context, AsyncSnapshot<String> snapshot) {
+                          if (!snapshot.hasData) {
+                            return Center(
+                              child: CircularProgressIndicator(),
+                            );
+                          }
+
+                          return Padding(
+                            padding: EdgeInsets.symmetric(horizontal: MediaQuery.of(context).size.width * .10),
+                            child: MarkdownContent(data: snapshot.data ?? ""),
+                          );
+                        },
+                      ),
+                    ),
+                  ],
+                ),
               ),
               Flex(
                 direction: Axis.vertical,
@@ -140,65 +152,35 @@ class _HomeState extends State<Home> {
                   ),
                 ],
               ),
-              Flex(
-                direction: Axis.vertical,
-                mainAxisAlignment: MainAxisAlignment.start,
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  Flexible(
-                    flex: 1,
-                    child: Image(
-                      alignment: Alignment.topCenter,
-                      width: MediaQuery.of(context).size.width < 500 ? MediaQuery.of(context).size.width * 0.75 : 500,
-                      image: AssetImage("assets/images/haden-light-transparent-large.png"),
-                    ),
-                  ),
-                  Flexible(
-                    flex: 2,
-                    child: FutureBuilder(
-                      future: rootBundle.loadString("content/about.md"),
-                      builder: (BuildContext context, AsyncSnapshot<String> snapshot) {
-                        if (snapshot.hasData) {
+              Container(
+                color: Color(0xff333333),
+                child: Flex(
+                  direction: Axis.vertical,
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    Flexible(
+                      flex: 1,
+                      child: FutureBuilder(
+                        future: rootBundle.loadString("content/follow.md"),
+                        builder: (BuildContext context, AsyncSnapshot<String> snapshot) {
+                          if (!snapshot.hasData) {
+                            return Center(
+                              child: CircularProgressIndicator(),
+                            );
+                          }
+
                           return Padding(
-                            padding: EdgeInsets.symmetric(vertical: 15, horizontal: MediaQuery.of(context).size.width * .05),
+                            padding: EdgeInsets.symmetric(horizontal: MediaQuery.of(context).size.width * .10),
                             child: MarkdownContent(data: snapshot.data ?? ""),
                           );
-                        }
-
-                        return Center(
-                          child: CircularProgressIndicator(),
-                        );
-                      },
+                        },
+                      ),
                     ),
-                  ),
-                ],
+                  ],
+                ),
               ),
             ],
-          ),
-          Positioned(
-            top: 10,
-            right: 10,
-            child: Container(
-              child: DraggableWidget(
-                bottomMargin: 80,
-                topMargin: 80,
-                intialVisibility: true,
-                horizontalSapce: 20,
-                shadowBorderRadius: 50,
-                child: Container(
-                  height: 100,
-                  width: 200,
-                  decoration: BoxDecoration(
-                    color: Colors.blue,
-                  ),
-                  child: Stack(
-                    children: [IconButton(icon: Icon(Icons.close), onPressed: () {})],
-                  ),
-                ),
-                initialPosition: AnchoringPosition.bottomLeft,
-                dragController: _dragController,
-              ),
-            ),
           ),
         ],
       ),

@@ -1,8 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_web_plugins/flutter_web_plugins.dart';
 import 'package:hadenhiles/Home.dart';
 
 void main() {
+  configureApp();
   runApp(HadenHiles());
+}
+
+void configureApp() {
+  setUrlStrategy(PathUrlStrategy());
 }
 
 class HadenHiles extends StatelessWidget {
