@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:hadenhiles/widgets/MarkdownContent.dart';
 
 class Home extends StatefulWidget {
@@ -33,7 +35,7 @@ class _HomeState extends State<Home> {
                       flex: 1,
                       child: SingleChildScrollView(
                         child: FutureBuilder(
-                          future: rootBundle.loadString("content/about.md"),
+                          future: rootBundle.loadString("content/top.md"),
                           builder: (BuildContext context, AsyncSnapshot<String> snapshot) {
                             if (!snapshot.hasData) {
                               return Center(
@@ -137,18 +139,50 @@ class _HomeState extends State<Home> {
                             ),
                           ],
                         ),
-                        Flex(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          direction: Axis.vertical,
-                          children: [
-                            Flexible(
-                              flex: 1,
-                              child: Image(
-                                alignment: Alignment.bottomCenter,
-                                image: AssetImage("assets/images/portrait.png"),
+                        Container(
+                          color: Color(0xff333333),
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            children: [
+                              Flexible(
+                                flex: 1,
+                                child: Stack(
+                                  children: [
+                                    Icon(FontAwesomeIcons.youtube),
+                                    Text(
+                                      "YouTube Channel",
+                                      style: GoogleFonts.openSans(),
+                                    ),
+                                  ],
+                                ),
                               ),
-                            ),
-                          ],
+                              Flexible(
+                                flex: 1,
+                                child: Stack(
+                                  children: [
+                                    Icon(FontAwesomeIcons.instagram),
+                                    Text(
+                                      "Instagram",
+                                      style: GoogleFonts.openSans(),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                              Flexible(
+                                flex: 1,
+                                child: Stack(
+                                  children: [
+                                    Icon(FontAwesomeIcons.tiktok),
+                                    Text(
+                                      "TikTok",
+                                      style: GoogleFonts.openSans(),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            ],
+                          ),
                         ),
                       ],
                     ),
@@ -164,20 +198,23 @@ class _HomeState extends State<Home> {
                   children: [
                     Flexible(
                       flex: 1,
-                      child: FutureBuilder(
-                        future: rootBundle.loadString("content/follow.md"),
-                        builder: (BuildContext context, AsyncSnapshot<String> snapshot) {
-                          if (!snapshot.hasData) {
-                            return Center(
-                              child: CircularProgressIndicator(),
-                            );
-                          }
+                      child: SingleChildScrollView(
+                        child: FutureBuilder(
+                          future: rootBundle.loadString("content/bottom.md"),
+                          builder: (BuildContext context, AsyncSnapshot<String> snapshot) {
+                            if (!snapshot.hasData) {
+                              return Center(
+                                child: CircularProgressIndicator(),
+                              );
+                            }
 
-                          return Padding(
-                            padding: EdgeInsets.symmetric(horizontal: MediaQuery.of(context).size.width * .10),
-                            child: MarkdownContent(data: snapshot.data ?? ""),
-                          );
-                        },
+                            return Container(
+                              padding: EdgeInsets.symmetric(vertical: 50),
+                              width: (MediaQuery.of(context).size.width > 968) ? MediaQuery.of(context).size.width * .60 : MediaQuery.of(context).size.width * .90,
+                              child: MarkdownContent(data: snapshot.data ?? ""),
+                            );
+                          },
+                        ),
                       ),
                     ),
                   ],
