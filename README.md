@@ -1,6 +1,6 @@
 <p align="center">
   <a href="https://www.hadenhiles.com">
-    <img alt="Haden" src="./assets/images/haden-dark-transparent.png" width="300" />
+    <img alt="Haden" src="./assets/images/Logotype_color.png" width="500" />
   </a>
 </p>
 
